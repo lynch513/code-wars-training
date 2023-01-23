@@ -3,7 +3,9 @@
             [two-sum :refer [two-sum]]
             [remove-url-anchor :refer [remove-url-anchor]]
             [tribonacci :refer [tribonacci]]
-            [bus :refer [number]]))
+            [bus :refer [number]]
+            [rock-paper-scissors :refer [rps]]
+            [human-time :refer [human-readable]]))
 
 (deftest two-sum-tests
   (are [seq target expected] (= (two-sum seq target) expected)
@@ -36,3 +38,25 @@
     [[10 0] [3 5] [5 8]] 5
     [[3 0] [9 1] [4 10] [12 2] [6 1] [7 10]] 17
     [[3 0] [9 1] [4 8] [12 2] [6 1] [7 8]] 21))
+
+(deftest human-time-tests
+  (are [seconds expected] (= (human-readable seconds) expected)
+    0 "00:00:00"
+    59 "00:00:59"
+    60 "00:01:00"
+    90 "00:01:30"
+    86399 "23:59:59"
+    359999 "99:59:59"))
+
+(deftest rock-paper-scissors-tests
+  (are [p1 p2 expected] (= (rps p1 p2) expected)
+    "rock" "scissors" "Player 1 won!"
+    "scissors" "paper" "Player 1 won!"
+    "paper" "rock" "Player 1 won!"
+    "scissors" "rock" "Player 2 won!"
+    "paper" "scissors" "Player 2 won!"
+    "rock" "paper" "Player 2 won!"
+    "rock" "rock" "Draw!"
+    "paper" "paper" "Draw!"
+    "scissors" "scissors" "Draw!"
+    ))
